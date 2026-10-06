@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DETHEMBER | Atmospheric Black Metal</title>
+  <style>
+    :root {
+      --bg: #09090b;
+      --card-bg: #121217;
+      --accent: #8b0000;
+      --accent-bright: #d62828;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: #27272a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', serif;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-shadow: 0 0 15px rgba(214, 40, 40, 0.4);
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-style: italic;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      font-size: 1.1rem;
+    }
+
+    section {
+      margin: 40px 0;
+      padding: 30px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-bright);
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 15px;
+      color: var(--text);
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: block;
+      text-align: center;
+      padding: 14px 20px;
+      background: #18181f;
+      color: var(--text);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.9rem;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      border-color: var(--accent-bright);
+      color: #ffffff;
+      box-shadow: 0 0 10px rgba(214, 40, 40, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 0 20px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>DETHEMBER</h1>
+      <p class="tagline">Atmospheric & Experimental Black Metal</p>
+    </header>
+
+    <section id="about">
+      <h2>About the Project</h2>
+      <p>Dethember is a solo atmospheric and experimental black metal project crafting dark soundscapes, melancholic melodies, and raw poetic depth.</p>
+    </section>
+
+    <section id="releases">
+      <h2>Listen & Follow</h2>
+      <p>Connect with Dethember across streaming platforms and social media:</p>
+
+      <div class="links-grid">
+        <a href="#" class="btn" target="_blank">Bandcamp</a>
+        <a href="#" class="btn" target="_blank">Spotify</a>
+        <a href="#" class="btn" target="_blank">YouTube</a>
+        <a href="#" class="btn" target="_blank">Instagram</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; DETHEMBER. All rights reserved.</p>
+    </footer>
+  </div>
+
+</body>
+</html>
