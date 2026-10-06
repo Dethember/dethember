@@ -4,15 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DETHEMBER | Atmospheric Black Metal</title>
+  
+  <!-- Old English Web Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg: #09090b;
-      --card-bg: #121217;
-      --accent: #8b0000;
-      --accent-bright: #d62828;
-      --text: #e2e8f0;
-      --text-muted: #94a3b8;
-      --border: #27272a;
+      --bg: #000000;
+      --card-bg: rgba(17, 17, 22, 0.85);
+      --accent-crimson: #791b1b;
+      --accent-bright: #aa1e1e;
+      --text-silver: #c0c0c0;
+      --text-muted: #777777;
+      --border-silver: #333333;
+      --font-old-english: 'UnifrakturMaguntia', 'Old English Text MT', serif;
     }
 
     * {
@@ -23,8 +30,13 @@
 
     body {
       background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Georgia', serif;
+      background-image: linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)), url('face logo.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      color: var(--text-silver);
+      font-family: var(--font-old-english);
       line-height: 1.6;
       padding: 20px;
     }
@@ -36,47 +48,63 @@
 
     header {
       text-align: center;
-      padding: 60px 20px 40px;
-      border-bottom: 1px solid var(--border);
+      padding: 40px 20px 30px;
+      border-bottom: 1px solid var(--accent-crimson);
     }
 
-    h1 {
-      font-size: 3.5rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: #ffffff;
-      text-shadow: 0 0 15px rgba(214, 40, 40, 0.4);
-      margin-bottom: 10px;
+    .header-logo {
+      max-width: 320px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 15px rgba(121, 27, 27, 0.6));
+      margin-bottom: 15px;
     }
 
     .tagline {
-      font-style: italic;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      font-size: 1.1rem;
+      font-family: var(--font-old-english);
+      color: var(--text-silver);
+      letter-spacing: 0.05em;
+      font-size: 1.4rem;
     }
 
     section {
       margin: 40px 0;
       padding: 30px;
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
+      border: 1px solid var(--border-silver);
+      border-radius: 2px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(4px);
     }
 
     h2 {
-      font-size: 1.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--accent-bright);
+      font-family: var(--font-old-english);
+      font-size: 2.2rem;
+      letter-spacing: 0.05em;
+      color: var(--accent-crimson);
       margin-bottom: 20px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-silver);
       padding-bottom: 10px;
+      text-align: center;
     }
 
     p {
       margin-bottom: 15px;
-      color: var(--text);
+      color: var(--text-silver);
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .artwork-container {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .artwork-img {
+      max-width: 280px;
+      width: 100%;
+      border: 1px solid var(--accent-crimson);
+      box-shadow: 0 0 15px rgba(121, 27, 27, 0.4);
     }
 
     .links-grid {
@@ -90,29 +118,28 @@
       display: block;
       text-align: center;
       padding: 14px 20px;
-      background: #18181f;
-      color: var(--text);
+      background: #09090d;
+      color: var(--text-silver);
       text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 0.9rem;
-      border: 1px solid var(--border);
+      font-family: var(--font-old-english);
+      font-size: 1.3rem;
+      border: 1px solid var(--border-silver);
       transition: all 0.3s ease;
     }
 
     .btn:hover {
-      background: var(--accent);
+      background: var(--accent-crimson);
       border-color: var(--accent-bright);
       color: #ffffff;
-      box-shadow: 0 0 10px rgba(214, 40, 40, 0.3);
+      box-shadow: 0 0 12px rgba(121, 27, 27, 0.6);
     }
 
     footer {
       text-align: center;
       padding: 40px 0 20px;
       color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border);
+      font-size: 1rem;
+      border-top: 1px solid var(--border-silver);
     }
   </style>
 </head>
@@ -120,24 +147,40 @@
 
   <div class="container">
     <header>
-      <h1>DETHEMBER</h1>
-      <p class="tagline">Atmospheric & Experimental Black Metal</p>
+      <!-- Main Crest Logo -->
+      <img src="00000logo LLLL.jpg" alt="DETHEMBER Logo" class="header-logo">
+      <p class="tagline">One-man band from Iran. Atmospheric Black Metal / Persian Black Metal</p>
     </header>
 
-    <section id="about">
-      <h2>About the Project</h2>
-      <p>Dethember is a solo atmospheric and experimental black metal project crafting dark soundscapes, melancholic melodies, and raw poetic depth.</p>
+    <!-- Circle Artwork Section -->
+    <section id="visuals">
+      <div class="artwork-container">
+        <img src="face logo.png" alt="DETHEMBER Emblem" class="artwork-img">
+      </div>
     </section>
 
-    <section id="releases">
-      <h2>Listen & Follow</h2>
-      <p>Connect with Dethember across streaming platforms and social media:</p>
+    <!-- Music & Streaming Section -->
+    <section id="streaming">
+      <h2>Listen & Streaming</h2>
+      <p>Stream official releases across all major platforms:</p>
 
       <div class="links-grid">
-        <a href="#" class="btn" target="_blank">Bandcamp</a>
-        <a href="#" class="btn" target="_blank">Spotify</a>
-        <a href="#" class="btn" target="_blank">YouTube</a>
-        <a href="#" class="btn" target="_blank">Instagram</a>
+        <a href="https://open.spotify.com/artist/2boyGBpB3AMOLWnbMbCWeK?si=8LqT9CScRNaODARkZiceGA" class="btn" target="_blank">Spotify</a>
+        <a href="https://music.apple.com/ie/artist/dethember/1832686371" class="btn" target="_blank">Apple Music</a>
+        <a href="https://dethember.bandcamp.com/music" class="btn" target="_blank">Bandcamp</a>
+        <a href="https://www.youtube.com/channel/UCt35F5iFd4QVcahnmcgFNGw" class="btn" target="_blank">YouTube</a>
+      </div>
+    </section>
+
+    <!-- Social Media Links -->
+    <section id="socials">
+      <h2>Follow & Connect</h2>
+      <p>Join the official channels:</p>
+
+      <div class="links-grid">
+        <a href="https://www.instagram.com/dethember/" class="btn" target="_blank">Instagram</a>
+        <a href="https://www.tiktok.com/@dethemberband" class="btn" target="_blank">TikTok</a>
+        <a href="https://x.com/dethember" class="btn" target="_blank">X (Twitter)</a>
       </div>
     </section>
 
