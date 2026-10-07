@@ -99,12 +99,20 @@
       font-family: var(--font-driagwa);
       color: var(--text-silver);
       letter-spacing: 0.05em;
-      font-size: 1.8rem;
-      line-height: 1.4;
+      font-size: 1.5rem;
+      line-height: 1.3;
+      text-align: center;
+      padding: 0 10px;
     }
 
     .tagline-container span {
       display: block;
+    }
+
+    @media (max-width: 600px) {
+      .tagline-container {
+        font-size: 1.05rem;
+      }
     }
 
     section {
