@@ -246,6 +246,16 @@
       margin-top: 15px;
     }
 
+    .share-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin-top: 15px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .single-link {
       display: flex;
       justify-content: center;
@@ -259,6 +269,10 @@
 
     @media (max-width: 600px) {
       .links-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .share-grid {
         grid-template-columns: 1fr;
       }
 
@@ -314,12 +328,12 @@
     /* Toast Notification for Copy Link */
     #toast {
       visibility: hidden;
-      min-width: 200px;
+      min-width: 220px;
       background-color: var(--accent-crimson);
-      color: #fff;
+      color: #ffffff;
       text-align: center;
       border-radius: 2px;
-      padding: 12px;
+      padding: 12px 20px;
       position: fixed;
       z-index: 1000;
       left: 50%;
@@ -327,13 +341,13 @@
       transform: translateX(-50%);
       font-family: var(--font-driagwa);
       font-size: 1.2rem;
-      box-shadow: 0 0 15px rgba(0,0,0,0.8);
+      box-shadow: 0 0 15px rgba(0,0,0,0.9);
       border: 1px solid var(--accent-bright);
     }
 
     #toast.show {
       visibility: visible;
-      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.4s, fadeout 0.4s 2.6s;
     }
 
     @keyframes fadein {
@@ -463,7 +477,7 @@
       </div>
     </section>
 
-    <!-- Social Media Links & Native Share -->
+    <!-- Social Media Links Section -->
     <section id="socials">
       <h2 class="headline-old-english">Social Medias</h2>
 
@@ -472,9 +486,14 @@
         <a href="https://www.tiktok.com/@dethemberband" class="btn btn-ephesis" target="_blank">TikTok</a>
         <a href="https://x.com/dethember" class="btn btn-ephesis" target="_blank">X (Twitter)</a>
       </div>
+    </section>
 
-      <h3 class="sub-headline">Share Page</h3>
-      <div class="links-grid">
+    <!-- Share Webpage Section -->
+    <section id="share">
+      <h2 class="headline-old-english">Share Page</h2>
+      <p style="font-family: var(--font-driagwa); font-size: 1.3rem;">Spread the music across social media & messaging apps.</p>
+      
+      <div class="share-grid">
         <button onclick="shareWebpage()" class="btn btn-ephesis">Share Page</button>
         <button onclick="copyWebpageLink()" class="btn btn-ephesis">Copy Link</button>
       </div>
