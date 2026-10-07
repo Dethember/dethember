@@ -25,7 +25,6 @@
       --font-pentagram: 'Pentagrams Callygraphy', 'UnifrakturMaguntia', serif;
     }
 
-    /* Local custom font fallback declaration if Pentagrams Callygraphy is hosted locally */
     @font-face {
       font-family: 'Pentagrams Callygraphy';
       src: url('PentagramsCallygraphyRegular.ttf') format('truetype');
@@ -104,6 +103,14 @@
       text-align: center;
     }
 
+    .sub-headline {
+      font-family: var(--font-old-english);
+      font-size: 1.6rem;
+      color: var(--text-silver);
+      text-align: center;
+      margin: 25px 0 15px;
+    }
+
     p {
       margin-bottom: 15px;
       color: var(--text-silver);
@@ -138,7 +145,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 15px;
-      margin-top: 20px;
+      margin-top: 15px;
     }
 
     @media (max-width: 600px) {
@@ -215,20 +222,24 @@
     <!-- Visuals Section -->
     <section id="visuals">
       <div class="image-trio">
-        <img src="00555.jpg" alt="Dethember Photo Left">
+        <img src="00555.png" alt="Dethember Photo Left">
         <img src="face logo.png" alt="Dethember Face Logo Center" class="center-img">
-        <img src="Dethember Black torn.jpg" alt="Dethember Photo Right">
+        <img src="Dethember Black torn.png" alt="Dethember Photo Right">
       </div>
     </section>
 
     <!-- Music & Streaming Section -->
     <section id="streaming">
-      <h2 class="headline-old-english">Ψ ♪𓃵 ψ Steaming Platforms Ψ ♪𓃵 ψ</h2>
+      <h2 class="headline-old-english">Streaming Platforms</h2>
 
       <div class="links-grid">
         <a href="https://open.spotify.com/artist/2boyGBpB3AMOLWnbMbCWeK?si=8LqT9CScRNaODARkZiceGA" class="btn btn-ephesis" target="_blank">Spotify</a>
         <a href="https://music.apple.com/ie/artist/dethember/1832686371" class="btn btn-ephesis" target="_blank">Apple Music</a>
         <a href="https://www.youtube.com/channel/UCt35F5iFd4QVcahnmcgFNGw" class="btn btn-ephesis" target="_blank">YouTube</a>
+      </div>
+
+      <h3 class="sub-headline">Support & Audio</h3>
+      <div class="links-grid">
         <a href="https://music.youtube.com/channel/UCt35F5iFd4QVcahnmcgFNGw?si=4f2BvsUSdY5IgKw-" class="btn btn-ephesis" target="_blank">YouTube Music</a>
         <a href="https://tidal.com/artist/65228639" class="btn btn-ephesis" target="_blank">Tidal</a>
         <a href="https://dethember.bandcamp.com/music" class="btn btn-ephesis" target="_blank">Bandcamp</a>
@@ -243,6 +254,7 @@
         <a href="https://www.instagram.com/dethember/" class="btn btn-ephesis" target="_blank">Instagram</a>
         <a href="https://www.tiktok.com/@dethemberband" class="btn btn-ephesis" target="_blank">TikTok</a>
         <a href="https://x.com/dethember" class="btn btn-ephesis" target="_blank">X (Twitter)</a>
+        <a href="https://linktr.ee/Dethember" class="btn btn-ephesis" target="_blank">Linktree</a>
       </div>
     </section>
 
