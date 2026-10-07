@@ -11,6 +11,36 @@
   <link href="https://fonts.googleapis.com/css2?family=Ephesis&family=Explora&family=UnifrakturMaguntia&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    /* Local Custom Fonts */
+    @font-face {
+      font-family: 'Pentagrams Callygraphy';
+      src: url('PentagramsCallygraphyRegular.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Driagwa';
+      src: url('Driagwa.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'Ostrich Sans';
+      src: url('OstrichSans-Light.otf') format('opentype'),
+           url('ostrich-regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'ST Brigantina';
+      src: url('ST-Brigantina-free.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     :root {
       --bg: #000000;
       --card-bg: rgba(17, 17, 22, 0.85);
@@ -22,14 +52,9 @@
       --font-old-english: 'UnifrakturMaguntia', 'Old English Text MT', serif;
       --font-ephesis: 'Ephesis', cursive;
       --font-explora: 'Explora', cursive;
-      --font-pentagram: 'Pentagrams Callygraphy', 'UnifrakturMaguntia', serif;
-    }
-
-    @font-face {
-      font-family: 'Pentagrams Callygraphy';
-      src: url('PentagramsCallygraphyRegular.ttf') format('truetype');
-      font-weight: normal;
-      font-style: normal;
+      --font-driagwa: 'Driagwa', sans-serif;
+      --font-ostrich: 'Ostrich Sans', sans-serif;
+      --font-brigantina: 'ST Brigantina', serif;
     }
 
     * {
@@ -40,7 +65,7 @@
 
     body {
       background-color: var(--bg);
-      background-image: linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)), url('face logo.png');
+      background-image: linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)), url('playlist base ii.jpg');
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -71,7 +96,7 @@
     }
 
     .tagline-container {
-      font-family: var(--font-pentagram);
+      font-family: var(--font-driagwa);
       color: var(--text-silver);
       letter-spacing: 0.05em;
       font-size: 1.8rem;
@@ -148,6 +173,17 @@
       margin-top: 15px;
     }
 
+    .single-link {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .single-link .btn {
+      max-width: 300px;
+      width: 100%;
+    }
+
     @media (max-width: 600px) {
       .links-grid {
         grid-template-columns: 1fr;
@@ -180,8 +216,10 @@
     /* Contact Section Styling */
     .contact-container {
       text-align: center;
-      font-family: var(--font-explora);
+      font-family: var(--font-ostrich);
+      font-weight: 400;
       font-size: 2.2rem;
+      letter-spacing: 0.05em;
     }
 
     .contact-container a {
@@ -202,8 +240,8 @@
     }
 
     .footer-text {
-      font-family: var(--font-explora);
-      font-size: 2rem;
+      font-family: var(--font-brigantina);
+      font-size: 1.8rem;
     }
   </style>
 </head>
@@ -214,7 +252,7 @@
       <!-- Main Crest Logo -->
       <img src="00000logo LLLL.jpg" alt="DETHEMBER Logo" class="header-logo">
       <div class="tagline-container">
-        <span>One-man band from Iran</span>
+        <span>One man band from Iran</span>
         <span>Persian Black Metal</span>
       </div>
     </header>
@@ -238,10 +276,8 @@
         <a href="https://www.youtube.com/channel/UCt35F5iFd4QVcahnmcgFNGw" class="btn btn-ephesis" target="_blank">YouTube</a>
       </div>
 
-      <h3 class="sub-headline">Support & Audio</h3>
-      <div class="links-grid">
-        <a href="https://music.youtube.com/channel/UCt35F5iFd4QVcahnmcgFNGw?si=4f2BvsUSdY5IgKw-" class="btn btn-ephesis" target="_blank">YouTube Music</a>
-        <a href="https://tidal.com/artist/65228639" class="btn btn-ephesis" target="_blank">Tidal</a>
+      <h3 class="sub-headline">Support Artist</h3>
+      <div class="single-link">
         <a href="https://dethember.bandcamp.com/music" class="btn btn-ephesis" target="_blank">Bandcamp</a>
       </div>
     </section>
@@ -254,7 +290,6 @@
         <a href="https://www.instagram.com/dethember/" class="btn btn-ephesis" target="_blank">Instagram</a>
         <a href="https://www.tiktok.com/@dethemberband" class="btn btn-ephesis" target="_blank">TikTok</a>
         <a href="https://x.com/dethember" class="btn btn-ephesis" target="_blank">X (Twitter)</a>
-        <a href="https://linktr.ee/Dethember" class="btn btn-ephesis" target="_blank">Linktree</a>
       </div>
     </section>
 
