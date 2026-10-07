@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DETHEMBER | Atmospheric Black Metal</title>
 
-  <!-- Open Graph / Facebook / Discord Link Preview Meta Tags -->
+  <!-- Universal Link Preview Meta Tags (For WhatsApp, Telegram, X, Facebook, Discord, LinkedIn) -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dethember.github.io/dethember/">
   <meta property="og:title" content="DETHEMBER | Atmospheric Black Metal">
@@ -277,6 +277,7 @@
       text-decoration: none;
       border: 1px solid var(--border-silver);
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .btn-ephesis {
@@ -308,6 +309,41 @@
 
     .contact-container a:hover {
       color: var(--accent-bright);
+    }
+
+    /* Toast Notification for Copy Link */
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      background-color: var(--accent-crimson);
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 12px;
+      position: fixed;
+      z-index: 1000;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      font-family: var(--font-driagwa);
+      font-size: 1.2rem;
+      box-shadow: 0 0 15px rgba(0,0,0,0.8);
+      border: 1px solid var(--accent-bright);
+    }
+
+    #toast.show {
+      visibility: visible;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @keyframes fadein {
+      from {bottom: 0; opacity: 0;}
+      to {bottom: 30px; opacity: 1;}
+    }
+
+    @keyframes fadeout {
+      from {bottom: 30px; opacity: 1;}
+      to {bottom: 0; opacity: 0;}
     }
 
     footer {
@@ -427,7 +463,7 @@
       </div>
     </section>
 
-    <!-- Social Media Links -->
+    <!-- Social Media Links & Native Share -->
     <section id="socials">
       <h2 class="headline-old-english">Social Medias</h2>
 
@@ -435,6 +471,12 @@
         <a href="https://www.instagram.com/dethember/" class="btn btn-ephesis" target="_blank">Instagram</a>
         <a href="https://www.tiktok.com/@dethemberband" class="btn btn-ephesis" target="_blank">TikTok</a>
         <a href="https://x.com/dethember" class="btn btn-ephesis" target="_blank">X (Twitter)</a>
+      </div>
+
+      <h3 class="sub-headline">Share Page</h3>
+      <div class="links-grid">
+        <button onclick="shareWebpage()" class="btn btn-ephesis">Share Page</button>
+        <button onclick="copyWebpageLink()" class="btn btn-ephesis">Copy Link</button>
       </div>
     </section>
 
@@ -450,6 +492,32 @@
       <p class="footer-text">&copy; DETHEMBER. All rights reserved.</p>
     </footer>
   </div>
+
+  <div id="toast">Link copied to clipboard!</div>
+
+  <script>
+    function shareWebpage() {
+      const shareData = {
+        title: 'DETHEMBER | Atmospheric Black Metal',
+        text: 'DETHEMBER — One man band from Iran. Listen to Parishan Del & discography:',
+        url: 'https://dethember.github.io/dethember/'
+      };
+
+      if (navigator.share) {
+        navigator.share(shareData).catch((err) => console.log('Share canceled', err));
+      } else {
+        copyWebpageLink();
+      }
+    }
+
+    function copyWebpageLink() {
+      navigator.clipboard.writeText('https://dethember.github.io/dethember/').then(() => {
+        const toast = document.getElementById('toast');
+        toast.className = 'show';
+        setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
+      });
+    }
+  </script>
 
 </body>
 </html>
