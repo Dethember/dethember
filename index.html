@@ -1,242 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dethember - Official Website</title>
-    <style>
-        :root {
-            --bg-color: #08080a;
-            --card-bg: #121216;
-            --accent-color: #791b1b;
-            --text-main: #e0e0e0;
-            --text-muted: #999;
-            --border-color: #222;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dethember - Official Website</title>
+  <style>
+    :root {
+      --bg-color: #08080a;
+      --card-bg: #121217;
+      --border-color: #791b1b;
+      --text-color: #c0c0c0;
+      --accent-red: #9e2a2a;
+      --accent-hover: #b83b3b;
+    }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: 'Courier New', Courier, monospace;
-            line-height: 1.6;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Courier New', Courier, monospace;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-        }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 20px;
+      width: 100%;
+      max-width: 900px;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 20px;
-        }
+    h1 {
+      color: var(--accent-red);
+      font-size: 2.5rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
 
-        h1 {
-            color: var(--accent-color);
-            font-size: 2.5rem;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
+    p.subtitle {
+      font-size: 1rem;
+      color: #888;
+      letter-spacing: 2px;
+    }
 
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1rem;
-            letter-spacing: 2px;
-        }
+    .section-title {
+      color: var(--accent-red);
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      margin: 30px 0 20px 0;
+      text-transform: uppercase;
+      border-left: 4px solid var(--accent-red);
+      padding-left: 10px;
+      width: 100%;
+      max-width: 900px;
+    }
 
-        section {
-            margin-bottom: 40px;
-        }
+    /* Latest Single Card (Larger Hero Feature) */
+    .latest-release {
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      padding: 25px;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 0 30px rgba(121, 27, 27, 0.3);
+      margin-bottom: 40px;
+      text-align: center;
+    }
 
-        h2 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 10px;
-            letter-spacing: 1px;
-            color: #fff;
-        }
+    .latest-release img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border: 2px solid var(--border-color);
+      margin-bottom: 20px;
+    }
 
-        /* Featured Top Release Style */
-        .featured-release {
-            background-color: var(--card-bg);
-            border: 1px solid var(--accent-color);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(121, 27, 27, 0.3);
-            margin-bottom: 30px;
-        }
+    .latest-release h3 {
+      font-size: 1.8rem;
+      color: #fff;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
 
-        .featured-art {
-            width: 100%;
-            height: auto;
-            max-height: 400px;
-            object-fit: cover;
-            display: block;
-        }
+    .latest-release .date-badge {
+      color: var(--accent-red);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
 
-        .featured-info {
-            padding: 25px;
-        }
+    /* Discography Grid */
+    .discography-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 900px;
+      margin-bottom: 50px;
+    }
 
-        .featured-tag {
-            background-color: var(--accent-color);
-            color: #fff;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            padding: 4px 8px;
-            letter-spacing: 2px;
-            display: inline-block;
-            margin-bottom: 10px;
-        }
+    .release-card {
+      background: var(--card-bg);
+      border: 1px solid #333;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
 
-        .featured-title {
-            font-size: 1.8rem;
-            color: #fff;
-            margin-bottom: 10px;
-        }
+    .release-card:hover {
+      border-color: var(--border-color);
+    }
 
-        .release-desc {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
+    .release-card img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border: 1px solid #444;
+      margin-bottom: 15px;
+    }
 
-        /* Standard Release Cards */
-        .release-grid {
-            display: grid;
-            gap: 20px;
-        }
+    .release-card h4 {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 10px;
+    }
 
-        .release-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: border-color 0.3s ease;
-        }
+    /* Action Buttons */
+    .btn-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        .release-card:hover {
-            border-color: var(--accent-color);
-        }
+    .btn {
+      background-color: var(--accent-red);
+      color: #fff;
+      padding: 8px 16px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-family: inherit;
+      letter-spacing: 1px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
 
-        .release-details h3 {
-            color: #fff;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
+    .btn:hover {
+      background-color: var(--accent-hover);
+    }
 
-        .release-details p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
+    .btn-secondary {
+      background-color: #222;
+      border: 1px solid #444;
+    }
 
-        .btn {
-            background-color: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--accent-color);
-            padding: 8px 16px;
-            text-decoration: none;
-            font-family: inherit;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            white-space: nowrap;
-        }
+    .btn-secondary:hover {
+      background-color: #333;
+    }
 
-        .btn:hover {
-            background-color: var(--accent-color);
-            color: #fff;
-            box-shadow: 0 0 10px rgba(121, 27, 27, 0.5);
-        }
-
-        footer {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            margin-top: 40px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 20px;
-        }
-
-        @media (max-width: 600px) {
-            .release-card {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
+    footer {
+      margin-top: auto;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #555;
+      padding-top: 20px;
+      border-top: 1px solid #1a1a1a;
+      width: 100%;
+      max-width: 900px;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Dethember</h1>
-            <div class="subtitle">Atmospheric Black Metal / Experimental</div>
-        </header>
+  <header>
+    <h1>Dethember</h1>
+    <p class="subtitle">Atmospheric & Experimental Black Metal • Persian Lyrics</p>
+  </header>
 
-        <!-- FEATURED TOP RELEASE: Sorushi Bar Agahi -->
-        <section>
-            <h2>Latest Release</h2>
-            <div class="featured-release">
-                <!-- Replace 'sorushi-cover.jpg' with your actual cover artwork file name -->
-                <img src="sorushi-cover.jpg" alt="Sorushi Bar Agahi" class="featured-art">
-                <div class="featured-info">
-                    <span class="featured-tag">New Single • Out Now</span>
-                    <h3 class="featured-title">Sorushi Bar Agahi</h3>
-                    <p class="release-desc">The final piece in the five-song series, originally written in 2014 and fully rebuilt. Released October 14, 2026.</p>
-                    <!-- Update href with your streaming or YouTube link -->
-                    <a href="YOUR_LINK_HERE" target="_blank" class="btn">Listen / Stream</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- CATALOG / PREVIOUS RELEASES -->
-        <section>
-            <h2>Discography</h2>
-            <div class="release-grid">
-                
-                <!-- Parishan Del -->
-                <div class="release-card">
-                    <div class="release-details">
-                        <h3>Parishan Del</h3>
-                        <p>Released September 9, 2026</p>
-                    </div>
-                    <a href="YOUR_LINK_HERE" target="_blank" class="btn">Listen</a>
-                </div>
-
-                <!-- Add more past releases here as needed -->
-
-            </div>
-        </section>
-
-        <footer>
-            <p>&copy; Dethember. All rights reserved.</p>
-        </footer>
+  <!-- LATEST SINGLE SECTION -->
+  <div class="section-title">Latest Single</div>
+  <div class="latest-release">
+    <img src="https://img.youtube.com/vi/OAgH3AMZfJ0/hqdefault.jpg" alt="Sorushi Bar Agahi Cover Art">
+    <h3>Sorushi Bar Agahi</h3>
+    <div class="date-badge">Released: October 14, 2026</div>
+    <div class="btn-container">
+      <a href="https://youtu.be/OAgH3AMZfJ0?si=15vkT-5d3gvtP7TN" target="_blank" class="btn">Watch on YouTube</a>
+      <a href="https://ffm.to/sorushi-bar-agahi" target="_blank" class="btn btn-secondary">Stream / Platforms</a>
     </div>
+  </div>
+
+  <!-- DISCOGRAPHY SECTION -->
+  <div class="section-title">Discography</div>
+  <div class="discography-grid">
+
+    <!-- Parishan Del -->
+    <div class="release-card">
+      <img src="parishan-del.jpg" alt="Parishan Del Cover Art">
+      <h4>Parishan Del</h4>
+      <div class="btn-container">
+        <a href="#" target="_blank" class="btn btn-secondary">Listen</a>
+      </div>
+    </div>
+
+    <!-- Future releases can be added here following the same structure -->
+
+  </div>
+
+  <footer>
+    &copy; 2026 Dethember. All rights reserved. 100% Human-Made Artwork & Music.
+  </footer>
 
 </body>
 </html>
