@@ -295,6 +295,20 @@
       gap: 15px;
     }
 
+    .track-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .track-thumb {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border: 1px solid var(--accent-crimson);
+      box-shadow: 0 0 8px rgba(121, 27, 27, 0.4);
+    }
+
     .track-title {
       font-family: var(--font-old-english);
       font-size: 1.4rem;
@@ -331,6 +345,11 @@
       }
 
       .track-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .track-info {
         flex-direction: column;
         text-align: center;
       }
@@ -527,49 +546,73 @@
       <div class="catalog-list">
         <!-- Parishan Del -->
         <div class="track-item">
-          <span class="track-title">Parishan Del</span>
+          <div class="track-info">
+            <img src="parishan del coverart PS.jpg" alt="Parishan Del Cover" class="track-thumb">
+            <span class="track-title">Parishan Del</span>
+          </div>
           <a href="https://ffm.to/parishan-del" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Owrang -->
         <div class="track-item">
-          <span class="track-title">Owrang</span>
+          <div class="track-info">
+            <img src="CoverArt Owrang.jpg" alt="Owrang Cover" class="track-thumb">
+            <span class="track-title">Owrang</span>
+          </div>
           <a href="https://ffm.to/owrang" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Forgotten Lives -->
         <div class="track-item">
-          <span class="track-title">Forgotten Lives</span>
+          <div class="track-info">
+            <img src="Forgotten Lives CoverArt.png" alt="Forgotten Lives Cover" class="track-thumb">
+            <span class="track-title">Forgotten Lives</span>
+          </div>
           <a href="https://ffm.to/forgotten-lives" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Sorudi Baraye Nabudi -->
         <div class="track-item">
-          <span class="track-title">Sorudi Baraye Nabudi</span>
+          <div class="track-info">
+            <img src="Sorudi Baraye Nabudi CoverArt.png" alt="Sorudi Baraye Nabudi Cover" class="track-thumb">
+            <span class="track-title">Sorudi Baraye Nabudi</span>
+          </div>
           <a href="https://ffm.to/sorudi-baraye-nabudi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Divanegi -->
         <div class="track-item">
-          <span class="track-title">Divanegi</span>
+          <div class="track-info">
+            <img src="Divanegi CoverArt.png" alt="Divanegi Cover" class="track-thumb">
+            <span class="track-title">Divanegi</span>
+          </div>
           <a href="https://ffm.to/divanegi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Fed The One By Youth Blood -->
         <div class="track-item">
-          <span class="track-title">Fed The One By Youth Blood</span>
+          <div class="track-info">
+            <img src="Fed The One By Youth Blood.png" alt="Fed The One By Youth Blood Cover" class="track-thumb">
+            <span class="track-title">Fed The One By Youth Blood</span>
+          </div>
           <a href="https://ffm.to/rqk2gn4" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Sug -->
         <div class="track-item">
-          <span class="track-title">Sug</span>
+          <div class="track-info">
+            <img src="sug.png" alt="Sug Cover" class="track-thumb">
+            <span class="track-title">Sug</span>
+          </div>
           <a href="https://ffm.to/jljrmz1" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Duskfall -->
         <div class="track-item">
-          <span class="track-title">Duskfall</span>
+          <div class="track-info">
+            <img src="duskfall.png" alt="Duskfall Cover" class="track-thumb">
+            <span class="track-title">Duskfall</span>
+          </div>
           <a href="https://ffm.to/k0wxd9p" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
       </div>
