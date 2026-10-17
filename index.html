@@ -88,6 +88,65 @@
       overflow-x: hidden;
     }
 
+    .audio-toggle {
+      position: fixed;
+      top: max(16px, env(safe-area-inset-top));
+      left: max(16px, env(safe-area-inset-left));
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      color: var(--text-silver);
+      background: rgba(9, 9, 13, 0.92);
+      border: 1px solid var(--border-silver);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .audio-toggle:hover,
+    .audio-toggle:focus-visible {
+      color: #ffffff;
+      border-color: var(--accent-bright);
+      box-shadow: 0 0 12px rgba(121, 27, 27, 0.6);
+    }
+
+    .audio-toggle svg {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .audio-toggle .sound-on-icon {
+      display: none;
+    }
+
+    .audio-toggle.is-playing .sound-on-icon {
+      display: block;
+    }
+
+    .audio-toggle.is-playing .sound-off-icon {
+      display: none;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     /* Fixed Looping Video Background */
     .bg-video {
       position: fixed;
@@ -96,6 +155,7 @@
       width: 100vw;
       height: 100vh;
       object-fit: cover;
+      filter: brightness(1.08);
       z-index: -2;
     }
 
@@ -348,10 +408,41 @@
       gap: 12px;
     }
 
+    .track-actions.has-lyrics .lyrics-toggle-btn {
+      order: -1;
+    }
+
     .track-btn {
       padding: 6px 16px;
       font-size: 1.5rem;
       min-width: 130px;
+    }
+
+    .featured-title {
+      font-family: var(--font-old-english);
+      font-size: 2.2rem;
+      color: var(--text-silver);
+      margin-bottom: 5px;
+    }
+
+    .featured-date {
+      font-family: var(--font-driagwa);
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      margin-bottom: 15px;
+    }
+
+    .featured-actions {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .featured-actions .lyrics-toggle-btn {
+      position: absolute;
+      left: calc(50% + 112px);
     }
 
     /* Lyrics Card Toggle Button (using eye_card_icon.svg) */
@@ -400,6 +491,41 @@
       border-top-color: var(--accent-crimson);
     }
 
+    .stream-panel {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.6s ease-in-out, opacity 0.4s ease-in-out, padding 0.3s ease;
+      background: rgba(12, 12, 16, 0.95);
+      border-top: 1px solid transparent;
+      padding: 0 20px;
+    }
+
+    .stream-panel.open {
+      max-height: 900px;
+      opacity: 1;
+      padding: 20px;
+      border-top-color: var(--accent-crimson);
+    }
+
+    .stream-panel iframe {
+      display: block;
+      width: 100%;
+      height: 650px;
+      border: 1px solid var(--accent-crimson);
+      background: #09090d;
+    }
+
+    .stream-fallback {
+      margin-top: 12px;
+      font-family: var(--font-driagwa);
+      font-size: 1rem;
+    }
+
+    .stream-fallback a {
+      color: var(--text-silver);
+    }
+
     .lyrics-card-img {
       max-width: 420px;
       width: 100%;
@@ -427,27 +553,151 @@
     }
 
     @media (max-width: 600px) {
+      body {
+        padding: 12px;
+      }
+
+      .container {
+        width: 100%;
+      }
+
+      header {
+        padding: 28px 12px 24px;
+      }
+
+      .header-logo {
+        max-width: min(280px, 85vw);
+      }
+
+      section {
+        margin: 24px 0;
+        padding: 20px 14px;
+      }
+
+      .headline-old-english {
+        font-size: 1.8rem;
+        margin-bottom: 16px;
+      }
+
+      .sub-headline {
+        font-size: 1.5rem;
+        margin: 26px 0 12px;
+      }
+
+      .image-trio {
+        gap: 14px;
+        margin: 14px 0;
+      }
+
+      .image-trio img {
+        max-width: 220px;
+      }
+
+      .image-trio img.center-img {
+        max-width: 240px;
+      }
+
+      .video-container {
+        margin: 16px auto;
+      }
+
+      .featured-title {
+        font-size: 1.7rem;
+      }
+
+      .featured-date {
+        font-size: 1.1rem;
+      }
+
       .links-grid {
         grid-template-columns: 1fr;
       }
 
       .track-item {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row;
+        padding: 10px 8px;
+        gap: 8px;
       }
 
       .track-info {
-        flex-direction: column;
-        text-align: center;
+        flex: 1;
+        flex-direction: row;
+        min-width: 0;
+        gap: 10px;
+      }
+
+      .track-thumb {
+        flex: 0 0 42px;
+        width: 42px;
+        height: 42px;
+      }
+
+      .track-title {
+        font-size: 1.05rem;
+        text-align: left;
       }
 
       .track-actions {
-        flex-direction: column;
-        width: 100%;
+        flex-direction: row;
+        flex: 0 0 auto;
+        width: auto;
+        gap: 6px;
+      }
+
+      .track-actions.has-lyrics {
+        flex-direction: row;
       }
 
       .track-btn {
-        width: 100%;
+        width: auto;
+        min-width: 0;
+        padding: 6px 10px;
+        font-size: 1.25rem;
+      }
+
+      .lyrics-toggle-btn img {
+        width: 28px;
+        height: 36px;
+      }
+
+      .stream-panel.open {
+        padding: 14px 10px;
+      }
+
+      .stream-panel iframe {
+        height: 65vh;
+        min-height: 440px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      body {
+        padding: 8px;
+      }
+
+      section {
+        padding: 16px 10px;
+      }
+
+      .track-item {
+        gap: 6px;
+      }
+
+      .track-info {
+        gap: 7px;
+      }
+
+      .track-title {
+        font-size: 0.95rem;
+      }
+
+      .track-actions {
+        gap: 4px;
+      }
+
+      .track-btn {
+        padding: 6px 8px;
+        font-size: 1.15rem;
       }
     }
 
@@ -584,9 +834,22 @@
 </head>
 <body>
 
+  <audio id="siteAudio" src="Dancing%20without%20moving.mp3" autoplay muted loop preload="auto"></audio>
+  <button id="audioToggle" class="audio-toggle" type="button" aria-label="Turn background music on" aria-pressed="false" title="Turn background music on">
+    <svg class="sound-off-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+      <path d="m17 9 5 6m0-6-5 6"></path>
+    </svg>
+    <svg class="sound-on-icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M11 5 6 9H3v6h3l5 4V5Z"></path>
+      <path d="M15.5 8.5a5 5 0 0 1 0 7m3-10a9 9 0 0 1 0 13"></path>
+    </svg>
+  </button>
+  <span id="audioStatus" class="visually-hidden" aria-live="polite"></span>
+
   <!-- Background Looping Video -->
   <video autoplay muted loop playsinline class="bg-video">
-    <source src="AEBGWEBDETHPENTA.mp4" type="video/mp4">
+    <source src="AEBGWEB.mp4" type="video/mp4">
   </video>
   <div class="bg-overlay"></div>
 
@@ -631,20 +894,24 @@
       <div class="track-wrapper" style="margin-bottom: 25px;">
         <div class="track-item" style="flex-direction: column; text-align: center; padding: 20px;">
           <img src="Sorushi Bar Agahi CoverArt.png" alt="Sorushi Bar Agahi Artwork" style="max-width: 280px; width: 100%; border: 1px solid var(--accent-crimson); box-shadow: 0 0 15px rgba(121, 27, 27, 0.5); margin-bottom: 15px;">
-          <h3 style="font-family: var(--font-old-english); font-size: 2.2rem; color: var(--text-silver); margin-bottom: 5px;">Sorushi Bar Agahi</h3>
-          <p style="font-family: var(--font-driagwa); font-size: 1.3rem; color: var(--text-muted); margin-bottom: 15px;">October 14, 2026</p>
+          <h3 class="featured-title">Sorushi Bar Agahi</h3>
+          <p class="featured-date">October 14, 2026</p>
           
-          <div style="display: flex; gap: 12px; align-items: center; justify-content: center;">
-            <a href="https://ffm.to/sorushi-bar-agahi" class="btn btn-ephesis" target="_blank" style="width: 200px;">Listen / Stream</a>
-            <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorushi')" title="View Lyrics Card">
+          <div class="featured-actions">
+            <button type="button" class="btn btn-ephesis stream-toggle-btn" onclick="toggleStream('stream-sorushi', this)" aria-controls="stream-sorushi" aria-expanded="false" style="width: 200px;">Stream</button>
+            <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorushi', this)" title="View Sorushi Bar Agahi Lyrics Card" aria-label="View Sorushi Bar Agahi Lyrics Card" aria-controls="lyrics-sorushi" aria-expanded="false">
               <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
             </button>
           </div>
         </div>
 
         <!-- Sorushi Bar Agahi Lyrics Panel -->
-        <div id="lyrics-sorushi" class="lyrics-panel">
-          <img src="Sorushi Bar Agahi Lyrics Card.jpg" alt="Sorushi Bar Agahi Lyrics Card" class="lyrics-card-img">
+        <div id="lyrics-sorushi" class="lyrics-panel" aria-hidden="true">
+          <img src="Sorushi%20Bar%20Agahi%20Lyrics%20Card.png" alt="Sorushi Bar Agahi Lyrics Card" class="lyrics-card-img">
+        </div>
+        <div id="stream-sorushi" class="stream-panel" aria-hidden="true">
+          <iframe data-src="https://ffm.to/sorushi-bar-agahi" title="Sorushi Bar Agahi streaming platforms" loading="lazy"></iframe>
+          <p class="stream-fallback">If the streaming page does not load here, <a href="https://ffm.to/sorushi-bar-agahi" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
         </div>
       </div>
 
@@ -665,15 +932,19 @@
               <img src="parishan%20del%20coverart%20PS.jpg" alt="Parishan Del Cover" class="track-thumb">
               <span class="track-title">Parishan Del</span>
             </div>
-            <div class="track-actions">
-              <a href="https://ffm.to/parishan-del" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
-              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-parishan')" title="View Lyrics Card">
+            <div class="track-actions has-lyrics">
+              <button type="button" class="btn btn-ephesis track-btn stream-toggle-btn" onclick="toggleStream('stream-parishan', this)" aria-controls="stream-parishan" aria-expanded="false">Listen</button>
+              <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-parishan', this)" title="View Parishan Del Lyrics Card" aria-label="View Parishan Del Lyrics Card" aria-controls="lyrics-parishan" aria-expanded="false">
                 <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
               </button>
             </div>
           </div>
-          <div id="lyrics-parishan" class="lyrics-panel">
-            <img src="Parishan Del Lyrics Card.jpg" alt="Parishan Del Lyrics Card" class="lyrics-card-img">
+          <div id="lyrics-parishan" class="lyrics-panel" aria-hidden="true">
+            <img src="Parishan%20Del%20Lyrics%20Card.png" alt="Parishan Del Lyrics Card" class="lyrics-card-img">
+          </div>
+          <div id="stream-parishan" class="stream-panel" aria-hidden="true">
+            <iframe data-src="https://ffm.to/parishan-del" title="Parishan Del streaming platforms" loading="lazy"></iframe>
+            <p class="stream-fallback">If the streaming page does not load here, <a href="https://ffm.to/parishan-del" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
           </div>
         </div>
 
@@ -684,15 +955,19 @@
               <img src="CoverArt%20Owrang.jpg" alt="Owrang Cover" class="track-thumb">
               <span class="track-title">Owrang</span>
             </div>
-            <div class="track-actions">
-              <a href="https://ffm.to/owrang" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
-              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-owrang')" title="View Lyrics Card">
+            <div class="track-actions has-lyrics">
+              <button type="button" class="btn btn-ephesis track-btn stream-toggle-btn" onclick="toggleStream('stream-owrang', this)" aria-controls="stream-owrang" aria-expanded="false">Listen</button>
+              <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-owrang', this)" title="View Owrang Lyrics Card" aria-label="View Owrang Lyrics Card" aria-controls="lyrics-owrang" aria-expanded="false">
                 <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
               </button>
             </div>
           </div>
-          <div id="lyrics-owrang" class="lyrics-panel">
-            <img src="Owrang Lyrics Card.jpg" alt="Owrang Lyrics Card" class="lyrics-card-img">
+          <div id="lyrics-owrang" class="lyrics-panel" aria-hidden="true">
+            <img src="Owrang%20Lyrics%20Card.png" alt="Owrang Lyrics Card" class="lyrics-card-img">
+          </div>
+          <div id="stream-owrang" class="stream-panel" aria-hidden="true">
+            <iframe data-src="https://ffm.to/owrang" title="Owrang streaming platforms" loading="lazy"></iframe>
+            <p class="stream-fallback">If the streaming page does not load here, <a href="https://ffm.to/owrang" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
           </div>
         </div>
 
@@ -704,8 +979,12 @@
               <span class="track-title">Forgotten Lives</span>
             </div>
             <div class="track-actions">
-              <a href="https://ffm.to/forgotten-lives" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+              <button type="button" class="btn btn-ephesis track-btn stream-toggle-btn" onclick="toggleStream('stream-forgotten', this)" aria-controls="stream-forgotten" aria-expanded="false">Listen</button>
             </div>
+          </div>
+          <div id="stream-forgotten" class="stream-panel" aria-hidden="true">
+            <iframe data-src="https://ffm.to/forgotten-lives" title="Forgotten Lives streaming platforms" loading="lazy"></iframe>
+            <p class="stream-fallback">If the streaming page does not load here, <a href="https://ffm.to/forgotten-lives" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
           </div>
         </div>
 
@@ -716,15 +995,19 @@
               <img src="Sorudi%20Baraye%20Nabudi%20CoverArt.png" alt="Sorudi Baraye Nabudi Cover" class="track-thumb">
               <span class="track-title">Sorudi Baraye Nabudi</span>
             </div>
-            <div class="track-actions">
-              <a href="https://ffm.to/sorudi-baraye-nabudi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
-              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorudi')" title="View Lyrics Card">
+            <div class="track-actions has-lyrics">
+              <button type="button" class="btn btn-ephesis track-btn stream-toggle-btn" onclick="toggleStream('stream-sorudi', this)" aria-controls="stream-sorudi" aria-expanded="false">Listen</button>
+              <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorudi', this)" title="View Sorudi Baraye Nabudi Lyrics Card" aria-label="View Sorudi Baraye Nabudi Lyrics Card" aria-controls="lyrics-sorudi" aria-expanded="false">
                 <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
               </button>
             </div>
           </div>
-          <div id="lyrics-sorudi" class="lyrics-panel">
-            <img src="Sorudi Baraye Nabudi Lyrics Card.jpg" alt="Sorudi Baraye Nabudi Lyrics Card" class="lyrics-card-img">
+          <div id="lyrics-sorudi" class="lyrics-panel" aria-hidden="true">
+            <img src="Sorudi%20Baraye%20Nabudi%20Lyrics%20Card.png" alt="Sorudi Baraye Nabudi Lyrics Card" class="lyrics-card-img">
+          </div>
+          <div id="stream-sorudi" class="stream-panel" aria-hidden="true">
+            <iframe data-src="https://ffm.to/sorudi-baraye-nabudi" title="Sorudi Baraye Nabudi streaming platforms" loading="lazy"></iframe>
+            <p class="stream-fallback">If the streaming page does not load here, <a href="https://ffm.to/sorudi-baraye-nabudi" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
           </div>
         </div>
 
@@ -735,15 +1018,19 @@
               <img src="Divanegi%20CoverArt.png" alt="Divanegi Cover" class="track-thumb">
               <span class="track-title">Divanegi</span>
             </div>
-            <div class="track-actions">
-              <a href="https://ffm.to/divanegi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
-              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-divanegi')" title="View Lyrics Card">
+            <div class="track-actions has-lyrics">
+              <button type="button" class="btn btn-ephesis track-btn stream-toggle-btn" onclick="toggleStream('stream-divanegi', this)" aria-controls="stream-divanegi" aria-expanded="false">Listen</button>
+              <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-divanegi', this)" title="View Divanegi Lyrics Card" aria-label="View Divanegi Lyrics Card" aria-controls="lyrics-divanegi" aria-expanded="false">
                 <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
               </button>
             </div>
           </div>
-          <div id="lyrics-divanegi" class="lyrics-panel">
-            <img src="Divanegi Lyrics Card.jpg" alt="Divanegi Lyrics Card" class="lyrics-card-img">
+          <div id="lyrics-divanegi" class="lyrics-panel" aria-hidden="true">
+            <img src="Divanegi%20Lyrics%20Card.png" alt="Divanegi Lyrics Card" class="lyrics-card-img">
+          </div>
+          <div id="stream-divanegi" class="stream-panel" aria-hidden="true">
+            <iframe data-src="https://ffm.to/divanegi" title="Divanegi streaming platforms" loading="lazy"></iframe>
+            <p class="stream-fallback">If the streaming page does not load here, <a href="https://ffm.to/divanegi" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
           </div>
         </div>
 
@@ -755,8 +1042,12 @@
               <span class="track-title">Fed The One By Youth Blood</span>
             </div>
             <div class="track-actions">
-              <a href="https://ffm.to/rqk2gn4" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+              <button type="button" class="btn btn-ephesis track-btn stream-toggle-btn" onclick="toggleStream('stream-fed', this)" aria-controls="stream-fed" aria-expanded="false">Listen</button>
             </div>
+          </div>
+          <div id="stream-fed" class="stream-panel" aria-hidden="true">
+            <iframe data-src="https://ffm.to/rqk2gn4" title="Fed The One By Youth Blood streaming platforms" loading="lazy"></iframe>
+            <p class="stream-fallback">If the streaming page does not load here, <a href="https://ffm.to/rqk2gn4" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
           </div>
         </div>
 
@@ -768,8 +1059,12 @@
               <span class="track-title">Sug</span>
             </div>
             <div class="track-actions">
-              <a href="https://ffm.to/jljrmz1" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+              <button type="button" class="btn btn-ephesis track-btn stream-toggle-btn" onclick="toggleStream('stream-sug', this)" aria-controls="stream-sug" aria-expanded="false">Listen</button>
             </div>
+          </div>
+          <div id="stream-sug" class="stream-panel" aria-hidden="true">
+            <iframe data-src="https://ffm.to/jljrmz1" title="Sug streaming platforms" loading="lazy"></iframe>
+            <p class="stream-fallback">If the streaming page does not load here, <a href="https://ffm.to/jljrmz1" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
           </div>
         </div>
 
@@ -781,8 +1076,12 @@
               <span class="track-title">Duskfall</span>
             </div>
             <div class="track-actions">
-              <a href="https://ffm.to/k0wxd9p" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+              <button type="button" class="btn btn-ephesis track-btn stream-toggle-btn" onclick="toggleStream('stream-duskfall', this)" aria-controls="stream-duskfall" aria-expanded="false">Listen</button>
             </div>
+          </div>
+          <div id="stream-duskfall" class="stream-panel" aria-hidden="true">
+            <iframe data-src="https://ffm.to/k0wxd9p" title="Duskfall streaming platforms" loading="lazy"></iframe>
+            <p class="stream-fallback">If the streaming page does not load here, <a href="https://ffm.to/k0wxd9p" target="_blank" rel="noopener noreferrer">open it directly</a>.</p>
           </div>
         </div>
 
@@ -853,14 +1152,68 @@
   <div id="toast">Link copied to clipboard!</div>
 
   <script>
+    const siteAudio = document.getElementById('siteAudio');
+    const audioToggle = document.getElementById('audioToggle');
+    const audioStatus = document.getElementById('audioStatus');
+
+    function updateAudioToggle() {
+      const isPlayingWithSound = !siteAudio.muted;
+      audioToggle.classList.toggle('is-playing', isPlayingWithSound);
+      audioToggle.setAttribute('aria-pressed', String(isPlayingWithSound));
+      audioToggle.setAttribute('aria-label', isPlayingWithSound ? 'Mute background music' : 'Turn background music on');
+      audioToggle.title = isPlayingWithSound ? 'Mute background music' : 'Turn background music on';
+    }
+
+    function reportAudioError(error) {
+      siteAudio.muted = true;
+      updateAudioToggle();
+      console.error('Background music playback failed:', error);
+      audioStatus.textContent = 'Background music could not start. Use the sound button to try again.';
+    }
+
+    audioToggle.addEventListener('click', async () => {
+      if (siteAudio.paused) {
+        siteAudio.muted = false;
+        try {
+          await siteAudio.play();
+          audioStatus.textContent = '';
+        } catch (error) {
+          reportAudioError(error);
+        }
+      } else {
+        siteAudio.muted = !siteAudio.muted;
+        audioStatus.textContent = '';
+      }
+
+      updateAudioToggle();
+    });
+
+    siteAudio.play().then(updateAudioToggle).catch(reportAudioError);
+
     function toggleBio() {
       const bioBox = document.getElementById('bioBox');
       bioBox.classList.toggle('open');
     }
 
-    function toggleLyrics(panelId) {
+    function toggleLyrics(panelId, button) {
       const panel = document.getElementById(panelId);
-      panel.classList.toggle('open');
+      const isOpen = panel.classList.toggle('open');
+      panel.setAttribute('aria-hidden', String(!isOpen));
+      button.setAttribute('aria-expanded', String(isOpen));
+    }
+
+    function toggleStream(panelId, button) {
+      const panel = document.getElementById(panelId);
+      const isOpen = panel.classList.toggle('open');
+      const frame = panel.querySelector('iframe');
+
+      if (isOpen && frame.dataset.loaded !== 'true') {
+        frame.src = frame.dataset.src;
+        frame.dataset.loaded = 'true';
+      }
+
+      panel.setAttribute('aria-hidden', String(!isOpen));
+      button.setAttribute('aria-expanded', String(isOpen));
     }
 
     function shareWebpage() {
