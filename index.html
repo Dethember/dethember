@@ -79,20 +79,42 @@
 
     body {
       background-color: var(--bg);
-      background-image: linear-gradient(rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0.88)), url('playlist%20base%20ii.jpg');
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-attachment: fixed;
       color: var(--text-silver);
       font-family: var(--font-old-english);
       line-height: 1.6;
       padding: 20px;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Fixed Looping Video Background */
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    /* Dark Overlay to keep text readable over the video */
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: -1;
     }
 
     .container {
       max-width: 900px;
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     header {
@@ -277,7 +299,7 @@
       border: 0;
     }
 
-    /* Tracklist Layout for Discography Catalog */
+    /* Tracklist Layout for Discography Catalog & Latest Single */
     .catalog-list {
       display: flex;
       flex-direction: column;
@@ -285,13 +307,18 @@
       margin-top: 20px;
     }
 
+    .track-wrapper {
+      display: flex;
+      flex-direction: column;
+      background: rgba(9, 9, 13, 0.85);
+      border: 1px solid var(--border-silver);
+    }
+
     .track-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 12px 18px;
-      background: rgba(9, 9, 13, 0.85);
-      border: 1px solid var(--border-silver);
       gap: 15px;
     }
 
@@ -315,10 +342,70 @@
       color: var(--text-silver);
     }
 
+    .track-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .track-btn {
       padding: 6px 16px;
       font-size: 1.5rem;
       min-width: 130px;
+    }
+
+    /* Lyrics Card Toggle Button (using eye_card_icon.svg) */
+    .lyrics-toggle-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .lyrics-toggle-btn img {
+      width: 32px;
+      height: 42px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 4px rgba(0,0,0,0.8));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .lyrics-toggle-btn:hover img {
+      transform: scale(1.12);
+      filter: drop-shadow(0 0 8px rgba(170, 30, 30, 0.8));
+    }
+
+    /* Collapsible Lyrics Card Panel */
+    .lyrics-panel {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.6s ease-in-out, opacity 0.4s ease-in-out, padding 0.3s ease;
+      background: rgba(12, 12, 16, 0.95);
+      border-top: 1px solid transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    .lyrics-panel.open {
+      max-height: 900px;
+      opacity: 1;
+      padding: 25px 20px;
+      border-top-color: var(--accent-crimson);
+    }
+
+    .lyrics-card-img {
+      max-width: 420px;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--accent-crimson);
+      box-shadow: 0 0 25px rgba(121, 27, 27, 0.6);
     }
 
     .links-grid {
@@ -352,6 +439,15 @@
       .track-info {
         flex-direction: column;
         text-align: center;
+      }
+
+      .track-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .track-btn {
+        width: 100%;
       }
     }
 
@@ -488,6 +584,12 @@
 </head>
 <body>
 
+  <!-- Background Looping Video -->
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="AEBGWEBDETHPENTA.mp4" type="video/mp4">
+  </video>
+  <div class="bg-overlay"></div>
+
   <div class="container">
     <header>
       <!-- Main Crest Logo -->
@@ -526,13 +628,24 @@
       <h2 class="headline-old-english">Latest Single</h2>
 
       <!-- Main Featured Release: Sorushi Bar Agahi -->
-      <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; text-align: center; margin-bottom: 25px;">
-        <img src="Sorushi Bar Agahi CoverArt.png" alt="Sorushi Bar Agahi Artwork" style="max-width: 320px; width: 100%; border: 1px solid var(--accent-crimson); box-shadow: 0 0 15px rgba(121, 27, 27, 0.5);">
-        <div>
-          <h3 style="font-family: var(--font-old-english); font-size: 2.2rem; color: var(--text-silver);">Sorushi Bar Agahi</h3>
-          <p style="font-family: var(--font-driagwa); font-size: 1.3rem; color: var(--text-muted);">October 14, 2026</p>
+      <div class="track-wrapper" style="margin-bottom: 25px;">
+        <div class="track-item" style="flex-direction: column; text-align: center; padding: 20px;">
+          <img src="Sorushi Bar Agahi CoverArt.png" alt="Sorushi Bar Agahi Artwork" style="max-width: 280px; width: 100%; border: 1px solid var(--accent-crimson); box-shadow: 0 0 15px rgba(121, 27, 27, 0.5); margin-bottom: 15px;">
+          <h3 style="font-family: var(--font-old-english); font-size: 2.2rem; color: var(--text-silver); margin-bottom: 5px;">Sorushi Bar Agahi</h3>
+          <p style="font-family: var(--font-driagwa); font-size: 1.3rem; color: var(--text-muted); margin-bottom: 15px;">October 14, 2026</p>
+          
+          <div style="display: flex; gap: 12px; align-items: center; justify-content: center;">
+            <a href="https://ffm.to/sorushi-bar-agahi" class="btn btn-ephesis" target="_blank" style="width: 200px;">Listen / Stream</a>
+            <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorushi')" title="View Lyrics Card">
+              <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
+            </button>
+          </div>
         </div>
-        <a href="https://ffm.to/sorushi-bar-agahi" class="btn btn-ephesis" target="_blank" style="max-width: 280px; width: 100%;">Listen / Stream</a>
+
+        <!-- Sorushi Bar Agahi Lyrics Panel -->
+        <div id="lyrics-sorushi" class="lyrics-panel">
+          <img src="Sorushi Bar Agahi Lyrics Card.jpg" alt="Sorushi Bar Agahi Lyrics Card" class="lyrics-card-img">
+        </div>
       </div>
 
       <!-- YouTube Visualizer / Teaser Player -->
@@ -544,77 +657,135 @@
       <h3 class="sub-headline">Catalog Releases</h3>
 
       <div class="catalog-list">
+        
         <!-- Parishan Del -->
-        <div class="track-item">
-          <div class="track-info">
-            <img src="parishan%20del%20coverart%20PS.jpg" alt="Parishan Del Cover" class="track-thumb">
-            <span class="track-title">Parishan Del</span>
+        <div class="track-wrapper">
+          <div class="track-item">
+            <div class="track-info">
+              <img src="parishan%20del%20coverart%20PS.jpg" alt="Parishan Del Cover" class="track-thumb">
+              <span class="track-title">Parishan Del</span>
+            </div>
+            <div class="track-actions">
+              <a href="https://ffm.to/parishan-del" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-parishan')" title="View Lyrics Card">
+                <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
+              </button>
+            </div>
           </div>
-          <a href="https://ffm.to/parishan-del" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+          <div id="lyrics-parishan" class="lyrics-panel">
+            <img src="Parishan Del Lyrics Card.jpg" alt="Parishan Del Lyrics Card" class="lyrics-card-img">
+          </div>
         </div>
 
         <!-- Owrang -->
-        <div class="track-item">
-          <div class="track-info">
-            <img src="CoverArt%20Owrang.jpg" alt="Owrang Cover" class="track-thumb">
-            <span class="track-title">Owrang</span>
+        <div class="track-wrapper">
+          <div class="track-item">
+            <div class="track-info">
+              <img src="CoverArt%20Owrang.jpg" alt="Owrang Cover" class="track-thumb">
+              <span class="track-title">Owrang</span>
+            </div>
+            <div class="track-actions">
+              <a href="https://ffm.to/owrang" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-owrang')" title="View Lyrics Card">
+                <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
+              </button>
+            </div>
           </div>
-          <a href="https://ffm.to/owrang" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+          <div id="lyrics-owrang" class="lyrics-panel">
+            <img src="Owrang Lyrics Card.jpg" alt="Owrang Lyrics Card" class="lyrics-card-img">
+          </div>
         </div>
 
-        <!-- Forgotten Lives -->
-        <div class="track-item">
-          <div class="track-info">
-            <img src="Forgotten%20Lives%20CoverArt.png" alt="Forgotten Lives Cover" class="track-thumb">
-            <span class="track-title">Forgotten Lives</span>
+        <!-- Forgotten Lives (Empty / No Lyrics Card) -->
+        <div class="track-wrapper">
+          <div class="track-item">
+            <div class="track-info">
+              <img src="Forgotten%20Lives%20CoverArt.png" alt="Forgotten Lives Cover" class="track-thumb">
+              <span class="track-title">Forgotten Lives</span>
+            </div>
+            <div class="track-actions">
+              <a href="https://ffm.to/forgotten-lives" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+            </div>
           </div>
-          <a href="https://ffm.to/forgotten-lives" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Sorudi Baraye Nabudi -->
-        <div class="track-item">
-          <div class="track-info">
-            <img src="Sorudi%20Baraye%20Nabudi%20CoverArt.png" alt="Sorudi Baraye Nabudi Cover" class="track-thumb">
-            <span class="track-title">Sorudi Baraye Nabudi</span>
+        <div class="track-wrapper">
+          <div class="track-item">
+            <div class="track-info">
+              <img src="Sorudi%20Baraye%20Nabudi%20CoverArt.png" alt="Sorudi Baraye Nabudi Cover" class="track-thumb">
+              <span class="track-title">Sorudi Baraye Nabudi</span>
+            </div>
+            <div class="track-actions">
+              <a href="https://ffm.to/sorudi-baraye-nabudi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorudi')" title="View Lyrics Card">
+                <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
+              </button>
+            </div>
           </div>
-          <a href="https://ffm.to/sorudi-baraye-nabudi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+          <div id="lyrics-sorudi" class="lyrics-panel">
+            <img src="Sorudi Baraye Nabudi Lyrics Card.jpg" alt="Sorudi Baraye Nabudi Lyrics Card" class="lyrics-card-img">
+          </div>
         </div>
 
         <!-- Divanegi -->
-        <div class="track-item">
-          <div class="track-info">
-            <img src="Divanegi%20CoverArt.png" alt="Divanegi Cover" class="track-thumb">
-            <span class="track-title">Divanegi</span>
+        <div class="track-wrapper">
+          <div class="track-item">
+            <div class="track-info">
+              <img src="Divanegi%20CoverArt.png" alt="Divanegi Cover" class="track-thumb">
+              <span class="track-title">Divanegi</span>
+            </div>
+            <div class="track-actions">
+              <a href="https://ffm.to/divanegi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-divanegi')" title="View Lyrics Card">
+                <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
+              </button>
+            </div>
           </div>
-          <a href="https://ffm.to/divanegi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+          <div id="lyrics-divanegi" class="lyrics-panel">
+            <img src="Divanegi Lyrics Card.jpg" alt="Divanegi Lyrics Card" class="lyrics-card-img">
+          </div>
         </div>
 
         <!-- Fed The One By Youth Blood -->
-        <div class="track-item">
-          <div class="track-info">
-            <img src="Fed%20The%20One%20By%20Youth%20Blood.png" alt="Fed The One By Youth Blood Cover" class="track-thumb">
-            <span class="track-title">Fed The One By Youth Blood</span>
+        <div class="track-wrapper">
+          <div class="track-item">
+            <div class="track-info">
+              <img src="Fed%20The%20One%20By%20Youth%20Blood.png" alt="Fed The One By Youth Blood Cover" class="track-thumb">
+              <span class="track-title">Fed The One By Youth Blood</span>
+            </div>
+            <div class="track-actions">
+              <a href="https://ffm.to/rqk2gn4" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+            </div>
           </div>
-          <a href="https://ffm.to/rqk2gn4" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Sug -->
-        <div class="track-item">
-          <div class="track-info">
-            <img src="sug.png" alt="Sug Cover" class="track-thumb">
-            <span class="track-title">Sug</span>
+        <div class="track-wrapper">
+          <div class="track-item">
+            <div class="track-info">
+              <img src="sug.png" alt="Sug Cover" class="track-thumb">
+              <span class="track-title">Sug</span>
+            </div>
+            <div class="track-actions">
+              <a href="https://ffm.to/jljrmz1" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+            </div>
           </div>
-          <a href="https://ffm.to/jljrmz1" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
 
         <!-- Duskfall -->
-        <div class="track-item">
-          <div class="track-info">
-            <img src="duskfall.png" alt="Duskfall Cover" class="track-thumb">
-            <span class="track-title">Duskfall</span>
+        <div class="track-wrapper">
+          <div class="track-item">
+            <div class="track-info">
+              <img src="duskfall.png" alt="Duskfall Cover" class="track-thumb">
+              <span class="track-title">Duskfall</span>
+            </div>
+            <div class="track-actions">
+              <a href="https://ffm.to/k0wxd9p" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
+            </div>
           </div>
-          <a href="https://ffm.to/k0wxd9p" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
         </div>
+
       </div>
     </section>
 
@@ -685,6 +856,11 @@
     function toggleBio() {
       const bioBox = document.getElementById('bioBox');
       bioBox.classList.toggle('open');
+    }
+
+    function toggleLyrics(panelId) {
+      const panel = document.getElementById(panelId);
+      panel.classList.toggle('open');
     }
 
     function shareWebpage() {
