@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="160" viewBox="0 0 128 160">
+  <title>Eye card icon</title>
+  <g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Outer card -->
+    <rect x="8" y="5" width="112" height="150" rx="13" stroke-width="4"/>
+    <!-- Inner frame -->
+    <rect x="17" y="13" width="94" height="134" rx="10" stroke-width="3.5"/>
+    <!-- Eye -->
+    <path d="M27 80 C38 65 49 59 64 59 C79 59 90 65 101 80 C90 95 79 101 64 101 C49 101 38 95 27 80 Z"
+          fill="#fff" stroke-width="4"/>
+    <circle cx="64" cy="80" r="14" fill="#fff" stroke-width="3.5"/>
+    <circle cx="64" cy="80" r="9" stroke-width="2.5"/>
+  </g>
+  <!-- Four-point stars -->
+  <g fill="#000">
+    <path d="M91 25 L96 34 L105 39 L96 44 L91 53 L86 44 L77 39 L86 34 Z"/>
+    <path d="M35 105 L40 114 L49 119 L40 124 L35 133 L30 124 L21 119 L30 114 Z"/>
+  </g>
+  <g fill="#fff">
+    <circle cx="91" cy="39" r="2.2"/>
+    <circle cx="35" cy="119" r="2.2"/>
+  </g>
+</svg>
