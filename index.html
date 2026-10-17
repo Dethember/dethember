@@ -354,6 +354,19 @@
       min-width: 130px;
     }
 
+    .featured-actions {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .featured-actions .lyrics-toggle-btn {
+      position: absolute;
+      left: calc(50% + 112px);
+    }
+
     /* Lyrics Card Toggle Button (using eye_card_icon.svg) */
     .lyrics-toggle-btn {
       background: none;
@@ -586,7 +599,7 @@
 
   <!-- Background Looping Video -->
   <video autoplay muted loop playsinline class="bg-video">
-    <source src="AEBGWEBDETHPENTA.mp4" type="video/mp4">
+    <source src="AEBGWEBDETHPENTA000.mp4" type="video/mp4">
   </video>
   <div class="bg-overlay"></div>
 
@@ -634,17 +647,17 @@
           <h3 style="font-family: var(--font-old-english); font-size: 2.2rem; color: var(--text-silver); margin-bottom: 5px;">Sorushi Bar Agahi</h3>
           <p style="font-family: var(--font-driagwa); font-size: 1.3rem; color: var(--text-muted); margin-bottom: 15px;">October 14, 2026</p>
           
-          <div style="display: flex; gap: 12px; align-items: center; justify-content: center;">
-            <a href="https://ffm.to/sorushi-bar-agahi" class="btn btn-ephesis" target="_blank" style="width: 200px;">Listen / Stream</a>
-            <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorushi')" title="View Lyrics Card">
+          <div class="featured-actions">
+            <a href="https://ffm.to/sorushi-bar-agahi" class="btn btn-ephesis" target="_blank" style="width: 200px;">Stream</a>
+            <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorushi', this)" title="View Sorushi Bar Agahi Lyrics Card" aria-label="View Sorushi Bar Agahi Lyrics Card" aria-controls="lyrics-sorushi" aria-expanded="false">
               <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
             </button>
           </div>
         </div>
 
         <!-- Sorushi Bar Agahi Lyrics Panel -->
-        <div id="lyrics-sorushi" class="lyrics-panel">
-          <img src="Sorushi Bar Agahi Lyrics Card.jpg" alt="Sorushi Bar Agahi Lyrics Card" class="lyrics-card-img">
+        <div id="lyrics-sorushi" class="lyrics-panel" aria-hidden="true">
+          <img src="Sorushi%20Bar%20Agahi%20Lyrics%20Card.png" alt="Sorushi Bar Agahi Lyrics Card" class="lyrics-card-img">
         </div>
       </div>
 
@@ -667,13 +680,13 @@
             </div>
             <div class="track-actions">
               <a href="https://ffm.to/parishan-del" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
-              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-parishan')" title="View Lyrics Card">
+              <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-parishan', this)" title="View Parishan Del Lyrics Card" aria-label="View Parishan Del Lyrics Card" aria-controls="lyrics-parishan" aria-expanded="false">
                 <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
               </button>
             </div>
           </div>
-          <div id="lyrics-parishan" class="lyrics-panel">
-            <img src="Parishan Del Lyrics Card.jpg" alt="Parishan Del Lyrics Card" class="lyrics-card-img">
+          <div id="lyrics-parishan" class="lyrics-panel" aria-hidden="true">
+            <img src="Parishan%20Del%20Lyrics%20Card.png" alt="Parishan Del Lyrics Card" class="lyrics-card-img">
           </div>
         </div>
 
@@ -686,13 +699,13 @@
             </div>
             <div class="track-actions">
               <a href="https://ffm.to/owrang" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
-              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-owrang')" title="View Lyrics Card">
+              <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-owrang', this)" title="View Owrang Lyrics Card" aria-label="View Owrang Lyrics Card" aria-controls="lyrics-owrang" aria-expanded="false">
                 <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
               </button>
             </div>
           </div>
-          <div id="lyrics-owrang" class="lyrics-panel">
-            <img src="Owrang Lyrics Card.jpg" alt="Owrang Lyrics Card" class="lyrics-card-img">
+          <div id="lyrics-owrang" class="lyrics-panel" aria-hidden="true">
+            <img src="Owrang%20Lyrics%20Card.png" alt="Owrang Lyrics Card" class="lyrics-card-img">
           </div>
         </div>
 
@@ -718,13 +731,13 @@
             </div>
             <div class="track-actions">
               <a href="https://ffm.to/sorudi-baraye-nabudi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
-              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorudi')" title="View Lyrics Card">
+              <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-sorudi', this)" title="View Sorudi Baraye Nabudi Lyrics Card" aria-label="View Sorudi Baraye Nabudi Lyrics Card" aria-controls="lyrics-sorudi" aria-expanded="false">
                 <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
               </button>
             </div>
           </div>
-          <div id="lyrics-sorudi" class="lyrics-panel">
-            <img src="Sorudi Baraye Nabudi Lyrics Card.jpg" alt="Sorudi Baraye Nabudi Lyrics Card" class="lyrics-card-img">
+          <div id="lyrics-sorudi" class="lyrics-panel" aria-hidden="true">
+            <img src="Sorudi%20Baraye%20Nabudi%20Lyrics%20Card.png" alt="Sorudi Baraye Nabudi Lyrics Card" class="lyrics-card-img">
           </div>
         </div>
 
@@ -737,13 +750,13 @@
             </div>
             <div class="track-actions">
               <a href="https://ffm.to/divanegi" class="btn btn-ephesis track-btn" target="_blank">Listen</a>
-              <button class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-divanegi')" title="View Lyrics Card">
+              <button type="button" class="lyrics-toggle-btn" onclick="toggleLyrics('lyrics-divanegi', this)" title="View Divanegi Lyrics Card" aria-label="View Divanegi Lyrics Card" aria-controls="lyrics-divanegi" aria-expanded="false">
                 <img src="eye_card_icon.svg" alt="Lyrics Card Icon">
               </button>
             </div>
           </div>
-          <div id="lyrics-divanegi" class="lyrics-panel">
-            <img src="Divanegi Lyrics Card.jpg" alt="Divanegi Lyrics Card" class="lyrics-card-img">
+          <div id="lyrics-divanegi" class="lyrics-panel" aria-hidden="true">
+            <img src="Divanegi%20Lyrics%20Card.png" alt="Divanegi Lyrics Card" class="lyrics-card-img">
           </div>
         </div>
 
@@ -858,9 +871,11 @@
       bioBox.classList.toggle('open');
     }
 
-    function toggleLyrics(panelId) {
+    function toggleLyrics(panelId, button) {
       const panel = document.getElementById(panelId);
-      panel.classList.toggle('open');
+      const isOpen = panel.classList.toggle('open');
+      panel.setAttribute('aria-hidden', String(!isOpen));
+      button.setAttribute('aria-expanded', String(isOpen));
     }
 
     function shareWebpage() {
