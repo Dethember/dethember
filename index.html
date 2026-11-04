@@ -270,6 +270,89 @@
       line-height: 1.5;
     }
 
+    .stats-backdrop[hidden] {
+      display: none;
+    }
+
+    .stats-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.88);
+    }
+
+    .stats-panel {
+      width: min(100%, 440px);
+      margin: 0;
+      padding: 24px;
+      background: rgba(12, 12, 16, 0.98);
+      border: 1px solid var(--accent-crimson);
+      border-radius: 2px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.9);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .stats-panel h2 {
+      margin-bottom: 18px;
+      color: var(--accent-crimson);
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .stats-panel input {
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 12px;
+      color: var(--text-silver);
+      background: #09090d;
+      border: 1px solid var(--border-silver);
+      font: inherit;
+    }
+
+    .stats-panel button {
+      padding: 10px 16px;
+      color: var(--text-silver);
+      background: #09090d;
+      border: 1px solid var(--border-silver);
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .stats-panel button:hover {
+      background: var(--accent-crimson);
+      border-color: var(--accent-bright);
+    }
+
+    .stats-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .stats-list {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      margin: 18px 0;
+      font-size: 1.1rem;
+    }
+
+    .stats-list strong {
+      color: #ffffff;
+      text-align: right;
+    }
+
+    #statsStatus {
+      min-height: 1.5em;
+      margin: 12px 0 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
     @media (max-width: 600px) {
       .tagline-container {
         font-size: 1.05rem;
@@ -1151,7 +1234,28 @@
 
   <div id="toast">Link copied to clipboard!</div>
 
+  <div id="statsBackdrop" class="stats-backdrop" hidden>
+    <section class="stats-panel" role="dialog" aria-modal="true" aria-labelledby="statsTitle">
+      <h2 id="statsTitle">Site Statistics</h2>
+      <div id="statsResults">
+        <div class="stats-list">
+          <span>Page visits</span><strong id="visitCount">0</strong>
+          <span>Link copies</span><strong id="copyCount">0</strong>
+          <span>Successful shares</span><strong id="shareCount">0</strong>
+        </div>
+        <div class="stats-actions">
+          <button id="refreshStats" type="button">Refresh</button>
+          <button id="closeStats" type="button">Close</button>
+        </div>
+      </div>
+      <p id="statsStatus" role="status" aria-live="polite"></p>
+    </section>
+  </div>
+
   <script>
+    const ANALYTICS_API = 'https://dethember-site-analytics.YOUR_ACCOUNT_SUBDOMAIN.workers.dev';
+    const analyticsConfigured = !ANALYTICS_API.includes('YOUR_ACCOUNT_SUBDOMAIN');
+
     const siteAudio = document.getElementById('siteAudio');
     const audioToggle = document.getElementById('audioToggle');
     const audioStatus = document.getElementById('audioStatus');
@@ -1190,6 +1294,27 @@
 
     siteAudio.play().then(updateAudioToggle).catch(reportAudioError);
 
+    async function recordAnalyticsEvent(eventName) {
+      if (!analyticsConfigured) return;
+
+      try {
+        const response = await fetch(`${ANALYTICS_API}/api/event`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ event: eventName }),
+          keepalive: true
+        });
+
+        if (!response.ok) {
+          throw new Error(`Analytics event request failed (${response.status}).`);
+        }
+      } catch (error) {
+        console.error('Could not record site analytics event:', error);
+      }
+    }
+
+    recordAnalyticsEvent('visit');
+
     function toggleBio() {
       const bioBox = document.getElementById('bioBox');
       bioBox.classList.toggle('open');
@@ -1216,7 +1341,7 @@
       button.setAttribute('aria-expanded', String(isOpen));
     }
 
-    function shareWebpage() {
+    async function shareWebpage() {
       const shareData = {
         title: 'DETHEMBER | Atmospheric Black Metal',
         text: 'DETHEMBER — One man band from Iran. Listen to Sorushi Bar Agahi & discography:',
@@ -1224,19 +1349,110 @@
       };
 
       if (navigator.share) {
-        navigator.share(shareData).catch((err) => console.log('Share canceled', err));
+        try {
+          await navigator.share(shareData);
+          recordAnalyticsEvent('share');
+        } catch (error) {
+          if (error.name !== 'AbortError') {
+            console.error('Could not share the website:', error);
+          }
+        }
       } else {
-        copyWebpageLink();
+        await copyWebpageLink();
       }
     }
 
-    function copyWebpageLink() {
-      navigator.clipboard.writeText('https://dethember.github.io/dethember/').then(() => {
+    async function copyWebpageLink() {
+      try {
+        await navigator.clipboard.writeText('https://dethember.github.io/dethember/');
+        recordAnalyticsEvent('copy');
         const toast = document.getElementById('toast');
         toast.className = 'show';
         setTimeout(() => { toast.className = toast.className.replace('show', ''); }, 3000);
-      });
+      } catch (error) {
+        console.error('Could not copy the website link:', error);
+      }
     }
+
+    const statsBackdrop = document.getElementById('statsBackdrop');
+    const statsStatus = document.getElementById('statsStatus');
+    let statsKeySequence = '';
+    let statsSequenceStartedAt = 0;
+
+    function openStatsPanel() {
+      statsBackdrop.hidden = false;
+      loadStats();
+    }
+
+    function closeStatsPanel() {
+      statsBackdrop.hidden = true;
+    }
+
+    async function loadStats() {
+      if (!analyticsConfigured) {
+        statsStatus.textContent = 'Analytics is not configured yet. Add your deployed Worker URL to the page.';
+        return;
+      }
+
+      statsStatus.textContent = 'Loading totals...';
+      try {
+        const response = await fetch(`${ANALYTICS_API}/api/stats`);
+
+        if (!response.ok) {
+          throw new Error(`Could not load totals (${response.status}).`);
+        }
+
+        const stats = await response.json();
+        document.getElementById('visitCount').textContent = stats.visit;
+        document.getElementById('copyCount').textContent = stats.copy;
+        document.getElementById('shareCount').textContent = stats.share;
+        statsStatus.textContent = 'All-time totals. This page does not store visitor identities.';
+      } catch (error) {
+        console.error('Could not load site analytics:', error);
+        statsStatus.textContent = error.message;
+      }
+    }
+
+    document.getElementById('closeStats').addEventListener('click', closeStatsPanel);
+    document.getElementById('refreshStats').addEventListener('click', loadStats);
+    statsBackdrop.addEventListener('click', (event) => {
+      if (event.target === statsBackdrop) closeStatsPanel();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !statsBackdrop.hidden) {
+        closeStatsPanel();
+        return;
+      }
+
+      if (!statsBackdrop.hidden || event.ctrlKey || event.altKey || event.metaKey ||
+          event.target instanceof HTMLInputElement ||
+          event.target instanceof HTMLTextAreaElement ||
+          event.target instanceof HTMLSelectElement ||
+          event.target.isContentEditable) {
+        return;
+      }
+
+      if (event.repeat || !/^\d$/u.test(event.key)) {
+        statsKeySequence = '';
+        return;
+      }
+
+      const now = performance.now();
+      if (!statsKeySequence || now - statsSequenceStartedAt > 1000) {
+        statsKeySequence = '';
+        statsSequenceStartedAt = now;
+      }
+      statsKeySequence += event.key;
+
+      if (statsKeySequence === '3214') {
+        statsKeySequence = '';
+        event.preventDefault();
+        openStatsPanel();
+      } else if (statsKeySequence.length >= 4) {
+        statsKeySequence = '';
+      }
+    });
   </script>
 
 </body>
